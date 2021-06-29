@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider as StyletronProvider, DebugEngine } from "styletron-react";
 import { Client as Styletron } from "styletron-engine-atomic";
+import Login from "./components/Login";
+import routes from "./components/pages/index"
+import ProtectedRoute from "./components/common/ProtectedRoute"
 
 const debug =
   process.env.NODE_ENV === "production" ? void 0 : new DebugEngine();
@@ -8,39 +13,43 @@ const debug =
 // 1. Create a client engine instance
 const engine = new Styletron();
 
-import { Div, StyleReset, ThemeProvider } from "atomize";
+import { StyleReset, ThemeProvider} from "atomize";
 
 const theme = {
   colors: {
-    black900: "#1d1d1e"
+    green100: "#48977d",
+    mainred100: "#E91E63",
+    mainred200: "#F48FB1",
+    mainred300: "#FF80AB",
+    mainred400: "#F8BBD0",
+    maingray400: "#BDBDBD",
+    mainyellow100: "#FDD835",
+    mainblack100: "#212121",
   }
 };
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <StyletronProvider value={engine} debug={debug} debugAfterHydration>
         <ThemeProvider theme={theme}>
           <StyleReset />
-          <Div
-            textColor="black900"
-            minH="100vh"
-            w="100vw"
-            d="flex"
-            flexDir="column"
-            justify="center"
-            align="center"
-            textSize="display2"
-            fontFamily="secondary"
-            textWeight="500"
-            p={{ x: "1rem", y: "4rem" }}
-          >
-            Start from here
-          </Div>
+          <BrowserRouter>
+            {
+              routes.map((data, idx) => (
+                <ProtectedRoute exact path={data.path} user={this.props.auth.user} key={idx} component={data.component}></ProtectedRoute>
+              ))
+            }
+            <Route exact path='/login' component={Login}/>
+          </BrowserRouter>
         </ThemeProvider>
       </StyletronProvider>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => (state);
+export default connect(mapStateToProps)(App);

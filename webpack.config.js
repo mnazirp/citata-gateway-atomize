@@ -6,7 +6,8 @@ module.exports = {
   entry: "./docs/entry.js",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: '/' //when using router react-router-dom
   },
   resolve: {
     alias: {
@@ -28,6 +29,7 @@ module.exports = {
     })
   ],
   devServer: {
-    contentBase: "docs/"
+    contentBase: "docs/",
+    historyApiFallback: true //when using router react-router-dom
   }
 };
