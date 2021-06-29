@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider as StyletronProvider, DebugEngine } from "styletron-react";
 import { Client as Styletron } from "styletron-engine-atomic";
+import routes from "./components/pages/index";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import Unauthorized from "./components/common/Unauthorized";
 import Login from "./components/Login";
-import routes from "./components/pages/index"
-import ProtectedRoute from "./components/common/ProtectedRoute"
 
 const debug =
   process.env.NODE_ENV === "production" ? void 0 : new DebugEngine();
@@ -13,7 +14,7 @@ const debug =
 // 1. Create a client engine instance
 const engine = new Styletron();
 
-import { StyleReset, ThemeProvider} from "atomize";
+import { StyleReset, ThemeProvider } from "atomize";
 
 const theme = {
   colors: {
@@ -25,6 +26,16 @@ const theme = {
     maingray400: "#BDBDBD",
     mainyellow100: "#FDD835",
     mainblack100: "#212121",
+  },
+  grid: {
+    containerWidth: {
+        xs: "540px",
+        sm: "720px",
+        md: "960px",
+        lg: "1156px",
+        xl: "1156px"
+    },
+    gutterWidth: "12px",
   }
 };
 
@@ -43,7 +54,8 @@ class App extends Component {
                 <ProtectedRoute exact path={data.path} user={this.props.auth.user} key={idx} component={data.component}></ProtectedRoute>
               ))
             }
-            <Route exact path='/login' component={Login}/>
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/404' component={Unauthorized} />
           </BrowserRouter>
         </ThemeProvider>
       </StyletronProvider>

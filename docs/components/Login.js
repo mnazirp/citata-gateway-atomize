@@ -137,13 +137,15 @@ class Login extends React.Component {
                         suffix={
                           <Icon
                             name="LongRight"
-                            size="16px"
-                            color="white"
+                            size="21px"
+                            color="mainblack100"
                             m={{ l: "1rem" }}
                           />
                         }
-                        bg="mainblack100"
+                        bg="mainyellow100"
                         hoverBg="mainred100"
+                        textColor="mainblack100"
+                        hoverTextColor="white"
                         disabled={errors | !isValid}
                       >
                         Login

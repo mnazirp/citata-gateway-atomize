@@ -1,15 +1,18 @@
-// Sized Sidedrawer
 import React from "react";
-import { Div, Button, SideDrawer, Icon, Text } from "atomize";
+import { Div, Button, SideDrawer, Icon } from "atomize";
 
 const SizeSideDrawer = ({ isOpen, onClose }) => {
   return (
-    <SideDrawer isOpen={isOpen} onClose={onClose} w={{ xs: "100vw", sm: "24rem" }}>
+    <SideDrawer
+      isOpen={isOpen}
+      onClose={onClose}
+      w={{ xs: "100vw", sm: "20rem" }}
+    >
       <Div d="flex" m={{ b: "4rem" }}>
         <Icon name="AlertSolid" color="danger900" />
       </Div>
       <Div d="flex" justify="flex-end">
-        
+
       </Div>
     </SideDrawer>
   );
@@ -30,16 +33,24 @@ class Drawer extends React.Component {
     return (
       <>
         <Button
-          bg="info700"
-          hoverBg="info600"
-          m={{ r: "0.5rem" }}
+          h="2.5rem"
+          w="2.5rem"
+          bg="mainyellow100"
+          hoverBg="maingray400"
+          rounded="circle"
+          shadow="2"
+          hoverShadow="4"
+          pos="fixed"
+          top="0%"
+          right="5rem"
+          m={{ t: "0.25rem", r: "1rem" }}
           onClick={() =>
             this.setState({
               showSideDrawer: true,
             })
           }
         >
-          <Icon name="Draft" size="30px" color="white" />
+          <Icon name="Menu" size="20px" color="mainblack100" />
         </Button>
         <SizeSideDrawer
           isOpen={showSideDrawer}
