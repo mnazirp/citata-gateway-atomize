@@ -7,7 +7,7 @@ const cookies = new Cookies()
 
 const login = async (email, password) => {
     try {
-        const response = await axios.post(API_URL + "/auth/login", { email, password })
+        const response = await axios.post(API_URL + "/authenticate", { email, password })
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('user_id', response.data.id)
         cookies.set("access_token", response.data.token, { path: "/" })

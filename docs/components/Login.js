@@ -33,6 +33,7 @@ class Login extends React.Component {
           onSubmit={({ email, password }) => {
             authServices.login(email, password)
               .then((res) => {
+                console.log(res);
                 this.props.success(res)
                 window.location.href = "/";
               })
