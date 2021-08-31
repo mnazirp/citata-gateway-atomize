@@ -3,7 +3,6 @@ import { Container, Row, Col, Text } from "atomize";
 import { GiCctvCamera } from "react-icons/gi";
 import Header from "../layouts/Header"
 import Drawer from "../layouts/Drawer"
-import { ApisTable } from "../pages/apis"
 import { Users } from "./widgets"
 
 class Home extends React.Component {
@@ -27,7 +26,9 @@ class Home extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col size={12}><ApisTable /></Col>
+            <Col size={12}>
+            <Users/>
+            </Col>
           </Row>
         </Container>
       </>
