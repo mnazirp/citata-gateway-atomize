@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider as StyletronProvider, DebugEngine } from "styletron-react";
 import { Client as Styletron } from "styletron-engine-atomic";
-import routes from "./components/pages/index";
+import routes from "./pages/index";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import Unauthorized from "./components/common/Unauthorized";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 
 const debug =
   process.env.NODE_ENV === "production" ? void 0 : new DebugEngine();

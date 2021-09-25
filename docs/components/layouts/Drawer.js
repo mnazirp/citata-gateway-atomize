@@ -1,17 +1,22 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Div, Button, SideDrawer, Icon, Anchor, Text } from "atomize";
 import { IoIosShuffle, IoIosGitNetwork, IoIosBarcode, IoIosSwitch, IoMdKey } from "react-icons/io";
 import { SiPostman } from "react-icons/si"
 
-const menu = [
-  { title: 'Dashboard', link: '/dashboard', icon: () => (<IoIosBarcode size={20} />) },
+const menuMember = [
+  { title: 'Home', link: '/', icon: () => (<IoIosBarcode size={20} />) },
   { title: 'Api\'s', link: '/apis', icon: () => (<IoIosGitNetwork size={20} />) },
-  { title: 'Modules', link: '/modules', icon: () => (<IoIosSwitch size={20} />) },
-  { title: 'Authorize', link: '/authorize', icon: () => (<IoMdKey size={20} />) },
+  { title: 'Services', link: '/modules', icon: () => (<IoIosSwitch size={20} />) },
   { title: 'Postman', link: '/postman', icon: () => (<SiPostman size={20} />) },
 ]
 
-const SizeSideDrawer = ({ isOpen, onClose }) => {
+const menuAdmin = [
+  { title: 'Home', link: '/', icon: () => (<IoIosBarcode size={20} />) },
+  { title: 'Members', link: '/apis', icon: () => (<IoIosGitNetwork size={20} />) },
+]
+
+const SizeSideDrawer = ({ isOpen, onClose, menu }) => {
   return (
     <>
       <SideDrawer
@@ -48,9 +53,10 @@ const SizeSideDrawer = ({ isOpen, onClose }) => {
 };
 
 class Drawer extends React.Component {
+  isAdmin = false;
   constructor(props) {
     super(props);
-
+    if (props.auth.user.user.role === 'ADMIN') this.isAdmin = true;
     this.state = {
       showSideDrawer: false
     };
@@ -84,10 +90,12 @@ class Drawer extends React.Component {
         <SizeSideDrawer
           isOpen={showSideDrawer}
           onClose={() => this.setState({ showSideDrawer: false })}
+          menu = {(this.isAdmin)? menuAdmin : menuMember}
         />
       </>
     );
   }
 }
 
-export default Drawer;
+const mapStateToProps = (state) => (state);
+export default connect(mapStateToProps)(Drawer);

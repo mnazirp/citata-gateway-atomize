@@ -1,9 +1,8 @@
 import React from "react";
-import { Container, Row, Col, Text } from "atomize";
+import { Container, Row, Col, Text, Div } from "atomize";
 import { GiCctvCamera } from "react-icons/gi";
-import Header from "../layouts/Header"
-import Drawer from "../layouts/Drawer"
-import { Users } from "./widgets"
+import Header from "../components/layouts/Header"
+import Drawer from "../components/layouts/Drawer"
 
 class Home extends React.Component {
   constructor(props) {
@@ -25,9 +24,16 @@ class Home extends React.Component {
               <Text tag="h1" textSize="heading" m={{ b: "1rem", l: "0.2rem" }}>Monitoring</Text>
             </Col>
           </Row>
-          <Row>
-            <Col size={12}>
-            <Users/>
+          <Row flexDir={{ xs: 'column', lg: 'row' }}>
+            <Col size={{ xs: 12, xl: 4 }}>
+              <Div p="1rem" bg="warning500">
+                This form
+              </Div>
+            </Col>
+            <Col size={{ xs: 12, xl: 8 }}>
+              <Div p="1rem" bg="warning500" >
+                This table
+              </Div>
             </Col>
           </Row>
         </Container>
